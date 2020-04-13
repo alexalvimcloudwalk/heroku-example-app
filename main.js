@@ -1,9 +1,13 @@
-var connect = require('connect');
-var serveStatic = require('serve-static');
+const express = require('express');
+const app = express();
+const path = require('path');
+const router = express.Router();
 
-connect()
-    .use('/', serveStatic(__dirname))
-    .use('/test', serveStatic(__dirname))
-    .listen(8080, function(){
-    console.log('Server running on 8080...');
+router.get('/',function(req,res){
+  res.sendFile(path.join(__dirname+'/index.html'));
 });
+
+app.use('/', router);
+app.listen(3000);
+
+console.log('Running at Port 3000');
